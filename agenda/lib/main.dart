@@ -1,9 +1,15 @@
-import 'package:agenda/views/create_task.dart';
-import 'package:agenda/views/tasks.dart';
+import 'package:agenda/model/tasks.dart';
+import 'package:agenda/views/done_tasks.dart';
+import 'package:agenda/views/initialPage.dart';
+import 'package:agenda/widgets/task.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: ((context) => Tasks(tasks: [])),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,10 +21,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/': (context) => const Tasks(),
-          'CreateTask': (context) => const CreateTask()
+          '/': (context) => const InitialPage(),
+          '/tasksDone': (context) => const DoneTasks()
         },
-        title: 'Flutter Demo',
+        title: 'ToDo List',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           appBarTheme: const AppBarTheme(
