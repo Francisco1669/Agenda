@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: ((context) => Tasks(tasks: [])),
+    create: ((context) => Tasks()),
     child: const MyApp(),
   ));
 }

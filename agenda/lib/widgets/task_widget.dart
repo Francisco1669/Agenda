@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
   final String tarefa;
-  DateTime date;
-  TaskWidget({super.key, required this.tarefa, required this.date});
+  DateTime dataCriacao;
+
+  TaskWidget({super.key, required this.tarefa, required this.dataCriacao});
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();

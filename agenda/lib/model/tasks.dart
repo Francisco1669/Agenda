@@ -1,14 +1,16 @@
 import 'package:agenda/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class Tasks extends ChangeNotifier {
-  List<TaskWidget> tasks;
+  List<TaskWidget> tasks = [];
 
-  Tasks({this.tasks = const []});
-
-  void addTask(TaskWidget task, DateTime date) {
-    task.date = date;
+  void addTask(TaskWidget task) {
     tasks.add(task);
     notifyListeners();
+  }
+
+  List<TaskWidget> getTasksForDate(DateTime date) {
+    return tasks.where((task) => isSameDay(task.dataCriacao, date)).toList();
   }
 }

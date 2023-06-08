@@ -29,14 +29,15 @@ class _InitialPageState extends State<InitialPage> {
 
   Map<DateTime, List<TaskWidget>> tasksSelected = {};
 
+  List<TaskWidget> _getTasksfromDay(DateTime date) {
+    final tasksProvider = Provider.of<Tasks>(context);
+    return tasksProvider.getTasksForDate(date);
+  }
+
   @override
   void initState() {
     tasksSelected = {};
     super.initState();
-  }
-
-  List<TaskWidget> _getTasksfromDay(DateTime date) {
-    return tasksSelected[date] ?? [];
   }
 
   @override
@@ -119,10 +120,11 @@ class _InitialPageState extends State<InitialPage> {
                                     } else {
                                       TaskWidget novaTarefa = TaskWidget(
                                         tarefa: taskNameController.text,
-                                        date: selectedDay,
+                                        dataCriacao: selectedDay,
                                       );
-                                      list.addTask(novaTarefa,
-                                          selectedDay); // Passa a data selecionada
+                                      list.addTask(
+                                        novaTarefa,
+                                      ); // Passa a data selecionada
                                       Navigator.of(context).pop();
                                     }
                                   },
@@ -168,39 +170,16 @@ class _InitialPageState extends State<InitialPage> {
                 },
                 headerStyle: const HeaderStyle(
                     formatButtonShowsNext: false, formatButtonVisible: false),
-                calendarBuilders: CalendarBuilders(
-                  dowBuilder: (context, day) {
-                    String text;
-                    if (day.weekday == DateTime.sunday) {
-                      text = 'Dom';
-                    } else if (day.weekday == DateTime.monday) {
-                      text = 'Seg';
-                    } else if (day.weekday == DateTime.tuesday) {
-                      text = 'Ter';
-                    } else if (day.weekday == DateTime.wednesday) {
-                      text = 'Qua';
-                    } else if (day.weekday == DateTime.thursday) {
-                      text = 'Qui';
-                    } else if (day.weekday == DateTime.friday) {
-                      text = 'Sex';
-                    } else if (day.weekday == DateTime.saturday) {
-                      text = 'Sab';
-                    } else {
-                      text = 'err';
-                    }
-                    return Center(
-                      child: Text(text),
-                    );
-                  },
-                ),
               ),
               Consumer<Tasks>(
-                builder: (BuildContext context, Tasks list, _) {
+                builder: (BuildContext context, Tasks tasksProvider, _) {
+                  final tasksForSelectedDay =
+                      tasksProvider.getTasksForDate(selectedDay);
                   return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: list.tasks.length,
+                    itemCount: tasksForSelectedDay.length,
                     itemBuilder: (context, index) {
-                      final listItem = list.tasks[index];
+                      final listItem = tasksForSelectedDay[index];
                       return Consumer(
                           builder: (BuildContext context, Tasks list, child) {
                         return Dismissible(
@@ -225,7 +204,7 @@ class _InitialPageState extends State<InitialPage> {
                           }),
                           child: TaskWidget(
                             tarefa: listItem.tarefa,
-                            date: DateTime.now(),
+                            dataCriacao: DateTime.now(),
                           ),
                         );
                       });
@@ -235,41 +214,6 @@ class _InitialPageState extends State<InitialPage> {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  Consumer<Tasks> criarTarefa() {
-    return Consumer<Tasks>(
-      builder: (BuildContext context, Tasks list, _) {
-        return ElevatedButton(
-          style: const ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(Palette.colorSec)),
-          onPressed: () {
-            if (taskNameController.text.isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  action: SnackBarAction(label: 'Desfazer', onPressed: () {}),
-                  content: Text(
-                    'Este campo não pode ser nulo',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Palette.whiteColor),
-                  ),
-                ),
-              );
-            } else {
-              TaskWidget novaTarefa = TaskWidget(
-                tarefa: taskNameController.text,
-                date: selectedDay,
-              );
-              list.addTask(novaTarefa, selectedDay); // Passa a data selecionada
-              Navigator.of(context).pop();
-            }
-          },
-          child: const Text('Adicionar'),
         );
       },
     );
