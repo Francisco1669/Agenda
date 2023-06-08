@@ -1,16 +1,17 @@
-import 'package:agenda/theme/Palette.dart';
+import 'package:agenda/theme/palette.dart';
 import 'package:flutter/material.dart';
 
-class Task extends StatefulWidget {
+// ignore: must_be_immutable
+class TaskWidget extends StatefulWidget {
   final String tarefa;
-
-  const Task({super.key, required this.tarefa});
+  DateTime date;
+  TaskWidget({super.key, required this.tarefa, required this.date});
 
   @override
-  State<Task> createState() => _TaskState();
+  State<TaskWidget> createState() => _TaskWidgetState();
 }
 
-class _TaskState extends State<Task> {
+class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(

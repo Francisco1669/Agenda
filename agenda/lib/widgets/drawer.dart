@@ -29,22 +29,6 @@ class MyDrawer extends StatelessWidget {
             title: const Text('Menu inicial'),
             onTap: () {},
           ),
-          ListTile(
-            leading: Icon(
-              Icons.done,
-              color: Colors.green[800],
-            ),
-            title: const Text('Concluídas'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.close,
-              color: Colors.red[700],
-            ),
-            title: const Text('Excluídas'),
-            onTap: () {},
-          ),
         ],
       ),
     );

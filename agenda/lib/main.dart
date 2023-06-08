@@ -1,7 +1,6 @@
 import 'package:agenda/model/tasks.dart';
-import 'package:agenda/views/done_tasks.dart';
-import 'package:agenda/views/initialPage.dart';
-import 'package:agenda/widgets/task.dart';
+import 'package:agenda/theme/palette.dart';
+import 'package:agenda/views/initial_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,15 +21,12 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const InitialPage(),
-          '/tasksDone': (context) => const DoneTasks()
         },
         title: 'ToDo List',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           appBarTheme: const AppBarTheme(
-            centerTitle: true,
-            backgroundColor: Colors.purple,
-          ),
+              centerTitle: true, backgroundColor: Palette.colorPri),
         ));
   }
 }

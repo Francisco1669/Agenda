@@ -1,12 +1,13 @@
-import 'package:agenda/widgets/task.dart';
+import 'package:agenda/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
 
 class Tasks extends ChangeNotifier {
-  List<Task> tasks;
+  List<TaskWidget> tasks;
 
   Tasks({this.tasks = const []});
 
-  void addTask(Task task) {
+  void addTask(TaskWidget task, DateTime date) {
+    task.date = date;
     tasks.add(task);
     notifyListeners();
   }
