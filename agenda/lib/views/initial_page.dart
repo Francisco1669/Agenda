@@ -1,4 +1,5 @@
 import 'package:agenda/model/tasks.dart';
+import 'package:agenda/modelTeste/task.dart';
 import 'package:agenda/theme/palette.dart';
 import 'package:agenda/widgets/drawer.dart';
 import 'package:agenda/widgets/task_widget.dart';
@@ -118,9 +119,12 @@ class _InitialPageState extends State<InitialPage> {
                                         ),
                                       );
                                     } else {
+                                      Task task = Task(
+                                          title: taskNameController.text,
+                                          creationDate: selectedDay);
                                       TaskWidget novaTarefa = TaskWidget(
-                                        tarefa: taskNameController.text,
-                                        dataCriacao: selectedDay,
+                                        tarefa: task.title,
+                                        dataCriacao: task.creationDate,
                                       );
                                       list.addTask(
                                         novaTarefa,
@@ -169,7 +173,7 @@ class _InitialPageState extends State<InitialPage> {
                   CalendarFormat.twoWeeks: '2 semanas'
                 },
                 headerStyle: const HeaderStyle(
-                    formatButtonShowsNext: false, formatButtonVisible: false),
+                    formatButtonShowsNext: false, formatButtonVisible: true),
               ),
               Consumer<Tasks>(
                 builder: (BuildContext context, Tasks tasksProvider, _) {
