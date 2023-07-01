@@ -1,4 +1,3 @@
-import 'package:agenda/modelTeste/task.dart';
 import 'package:agenda/theme/palette.dart';
 import 'package:flutter/material.dart';
 

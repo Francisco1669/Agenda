@@ -1,6 +1,6 @@
-import 'package:agenda/model/tasks.dart';
+import 'package:agenda/Controller/tasks_controller.dart';
 import 'package:agenda/theme/palette.dart';
-import 'package:agenda/views/initial_page.dart';
+import 'package:agenda/views/tasks_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
